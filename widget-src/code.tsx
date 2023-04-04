@@ -151,10 +151,10 @@ function Widget() {
 
   const [myArray, setmyArray] = useSyncedState("myArray", [
   //const myArray: [string, string][] = [
-    ["Simplification/Streamlining", "Remove unnecessary features"],
-    ["Simplification/Streamlining", "Simplify user interface"],
-    ["Simplification/Streamlining", "Reduce number of steps"],
-    ["Simplification/Streamlining", "Eliminate sources of complexity"],
+    ["Simplification/Streamlining", "Remove a feature and adjust the design to compensate"],
+    ["Simplification/Streamlining", "Reduce the number of interactions and adjust the design to compensate"],
+    ["Simplification/Streamlining", "Evaluate the number of steps in a visible or implied process"],
+    ["Simplification/Streamlining", "Eliminate a source of potential complexity"],
     ["Simplification/Streamlining", "Improve clarity of messaging"],
     ["User-friendliness", "Improve discoverability"],
     ["User-friendliness", "Provide better feedback"],
