@@ -118,8 +118,6 @@ const cardbacksketchesSrc=`<svg width="269" height="440" viewBox="0 0 269 440" f
 </svg>
 
 ` 
-
-
 const buttonSrc = `
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
   <circle cx="16" cy="16" r="15.5" stroke="black" stroke-opacity="0.1" fill="white"/>
@@ -151,46 +149,46 @@ function Widget() {
 
   const [myArray, setmyArray] = useSyncedState("myArray", [
   //const myArray: [string, string][] = [
-    ["Simplification/Streamlining", "Remove a feature and adjust the design to compensate"],
-    ["Simplification/Streamlining", "Reduce the number of interactions and adjust the design to compensate"],
-    ["Simplification/Streamlining", "Evaluate the number of steps in a visible or implied process"],
-    ["Simplification/Streamlining", "Eliminate a source of potential complexity"],
-    ["Simplification/Streamlining", "Improve clarity of messaging"],
-    ["User-friendliness", "Improve discoverability"],
-    ["User-friendliness", "Provide better feedback"],
-    ["User-friendliness", "Make error recovery easier"],
-    ["User-friendliness", "Provide personalized recommendations"],
-    ["User-friendliness", "Improve ease of use for novice users"],
-    ["Innovation/Technology", "Incorporate AI or machine learning"],
-    ["Innovation/Technology", "Use emerging technologies"],
-    ["Innovation/Technology", "Leverage APIs or SDKs"],
-    ["Innovation/Technology", "Improve performance or speed"],
-    ["Innovation/Technology", "Incorporate voice or gesture recognition"],
-    ["Accessibility/Inclusivity", "Make design more accessible for users with disabilities"],
-    ["Accessibility/Inclusivity", "Accommodate different cognitive abilities"],
-    ["Accessibility/Inclusivity", "Improve usability for low vision or hearing impairments"],
-    ["Accessibility/Inclusivity", "Improve availability for remote or underserved areas"],
-    ["Accessibility/Inclusivity", "Make design more culturally appropriate"],
-    ["Target Audience", "Align design with target audience preferences/values"],
-    ["Target Audience", "Improve usability for users with specific needs/interestss"],
-    ["Target Audience", "Create emotional resonance with target audience"],
-    ["Target Audience", "Improve branding/messaging to better appeal to target audience"],
-    ["Target Audience", "Differentiate design from similar products in the market"],
-    ["Aesthetics", "Improve visual appeal/elegance"],
-    ["Aesthetics", "Integrate color/texture to make design more engaging"],
-    ["Aesthetics", "Incorporate animations/visual effects"],
-    ["Aesthetics", "Improve consistency/coherence across different screens/contexts"],
-    ["Aesthetics", "Align design with current design trends/styles"],
-    ["Sustainability", "Reduce environmental impact throughout lifecycle"],
-    ["Sustainability", "Incorporate recycled/sustainable materials"],
-    ["Sustainability", "Design product to be more energy-efficient/eco-friendly"],
-    ["Sustainability", "Communicate sustainability features to users/stakeholders"],
-    ["Sustainability", "Improve durability/longevity to reduce waste"],
-    ["Scalability/Adaptability", "Make design more scalable for larger volumes of users/data"],
-    ["Scalability/Adaptability", "Improve flexibility/adaptability to meet changing user needs"],
-    ["Scalability/Adaptability", "Accommodate users with multiple devices/platforms"],
-    ["Scalability/Adaptability", "Design product to be more modular/extensible"],
-    ["Scalability/Adaptability", "Improve performance/reliability under different usage scenarios"]
+    [ "Simplification/Streamlining:" , "Remove a feature from the design" ],
+    [ "Simplification/Streamlining:" , "Reduce the number of interactions" ],
+    [ "Simplification/Streamlining:" , "Eliminate a step in a process" ],
+    [ "Simplification/Streamlining:" , "Eliminate a source of complexity" ],
+    [ "Simplification/Streamlining:" , "Examine messaging for clarity" ],
+    [ "User-friendliness:" , "Improve discoverability of features or functionality" ],
+    [ "User-friendliness:" , "Provide additional feedback for succesful use" ],
+    [ "User-friendliness:" , "Incorporate easy error recover for the audience" ],
+    [ "User-friendliness:" , "Create a new personalized element of the design" ],
+    [ "User-friendliness:" , "Improve ease of use for new or infrequent users" ],
+    [ "Innovation/Technology:" , "Incorporate AI or Machine Learning into the solution" ],
+    [ "Innovation/Technology:" , "Incorporate an AR or XR experience into the solution" ],
+    [ "Innovation/Technology:" , "Incorporate a chatbot or other AI-powered tool " ],
+    [ "Innovation/Technology:" , "Improve how the design would handle long loading of content" ],
+    [ "Innovation/Technology:" , "Incorporate voice or gesture recognition" ],
+    [ "Accessibility/Inclusivity:" , "Make design more accessible for users with disabilities" ],
+    [ "Accessibility/Inclusivity:" , "Improve the designs usability for non-english speaking languages" ],
+    [ "Accessibility/Inclusivity:" , "Improve usability for low vision or colorblind disabilitites" ],
+    [ "Accessibility/Inclusivity:" , "Improve availability for remote or underserved areas" ],
+    [ "Accessibility/Inclusivity:" , "Make the design friendly to a wides range of devices, inlcuding low cost " ],
+    [ "Target Audience:" , "Align design with target audience preferences/values" ],
+    [ "Target Audience:" , "Improve usability for users with specific needs/interests" ],
+    [ "Target Audience:" , "Create emotional resonance with target audience" ],
+    [ "Target Audience:" , "Improve branding/messaging to better appeal to target audience" ],
+    [ "Target Audience:" , "Differentiate design from similar products in the market" ],
+    [ "Aesthetics:" , "Improve visual appeal/elegance" ],
+    [ "Aesthetics:" , "Integrate color/texture to make design more engaging" ],
+    [ "Aesthetics:" , "Incorporate animations/visual effects" ],
+    [ "Aesthetics:" , "Improve consistency/coherence across different screens/contexts" ],
+    [ "Aesthetics:" , "Align design with current design trends/styles" ],
+    [ "Sustainability:" , "Reduce environmental impact throughout lifecycle" ],
+    [ "Sustainability:" , "Incorporate recycled/sustainable materials" ],
+    [ "Sustainability:" , "Design product to be more energy-efficient/eco-friendly" ],
+    [ "Sustainability:" , "Communicate sustainability features to users/stakeholders" ],
+    [ "Sustainability:" , "Improve durability/longevity to reduce waste" ],
+    [ "Scalability/Adaptability:" , "Make design more scalable for larger volumes of users/data" ],
+    [ "Scalability/Adaptability:" , "Improve flexibility/adaptability to meet changing user needs" ],
+    [ "Scalability/Adaptability:" , "Accommodate users with multiple devices/platforms" ],
+    [ "Scalability/Adaptability:" , "Design product to be more modular/extensible" ],
+    [ "Scalability/Adaptability:" , "Improve performance/reliability under different usage scenarios." ]
   ])
 
 
@@ -199,7 +197,7 @@ function Widget() {
   let [cardPrompt, setPrompt] =useSyncedState('cardprompt', 'prompt')
   let [cardCat, setCat] =useSyncedState('cardcat', 'category')
   let randomCard:string = ''
-
+  let [cardRotation, setRotation] = useSyncedState('cardRotation',0)
   let [remainingCards, SetRemaining] = useSyncedState('remainingCards', 40)
 
 
@@ -213,6 +211,11 @@ function Widget() {
     {
       itemType: 'separator',
     },
+/*     {
+      tooltip: 'How To Use',
+      propertyName: 'how_to_use',
+      itemType: 'action',
+    }, */
 /*     {
       tooltip: 'Clone Test',
       propertyName: 'clone',
@@ -257,8 +260,17 @@ function Widget() {
         
       });
 //offset card
-      node.x += 330;
-      node.y += 80;
+const randomInt: number = Math.floor(Math.random() * 201) - 100; // generate random integer 
+const randomRot: number = Math.floor(Math.random() * 21) - 10;
+
+node.x += 330 + randomInt;
+node.y += 80 + randomInt;
+
+setRotation(cardRotation = randomRot)
+
+//node.rotation += 10;
+
+console.log(randomRot)
 
 //remove dealt card from deck
 
@@ -311,6 +323,7 @@ if (isDeck) {
     <AutoLayout
     width={330}
     height={546}
+    rotation={0}
     >
       <SVG positioning={'absolute'} x={1} y={-1} src= {cardstackSrc}
       > </SVG>
@@ -331,6 +344,7 @@ if (isDeck) {
 } else if (!isFlipped) {
     return (
       <AutoLayout
+      rotation={cardRotation}
     >
       <SVG positioning={'absolute'} src= {cardbackSrc}
       > </SVG>
@@ -341,6 +355,7 @@ if (isDeck) {
 } else if (isFlipped) {
     return (
       <AutoLayout
+      rotation={cardRotation}
       //verticalAlignItems={'center'}
       horizontalAlignItems={'center'}
       direction={'vertical'}
