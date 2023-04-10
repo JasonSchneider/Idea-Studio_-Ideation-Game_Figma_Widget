@@ -134,7 +134,14 @@ const upIconSrc = `
   <path d="M9.08001 15.92L7.08001 15.92L7.08001 3.92002L1.58001 9.42002L0.160007 8.00002L8.08001 0.0800171L16 8.00002L14.58 9.42002L9.08001 3.92002L9.08001 15.92Z" fill="white"/>
   </svg>
 `
+const straigthenIconSrc = ` 
+<svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.00216 15.9736C6.70996 12.507 8.69128 9.43145 11.5552 7.35382C14.4192 5.27619 17.9578 4.34733 21.4729 4.75049" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 2"/>
+<path d="M9.75334 1.92387L16.0675 17.7979C16.101 17.8895 16.0982 17.9912 16.0597 18.0806C16.0213 18.1701 15.9504 18.2401 15.8626 18.2752L7.37136 21.9367C7.28534 21.9764 7.1877 21.9791 7.0998 21.9441C7.0119 21.909 6.94091 21.8392 6.90236 21.7498L0.588357 5.87527C0.554806 5.78359 0.557562 5.68179 0.596021 5.59222C0.63448 5.50265 0.705501 5.43262 0.793499 5.3975L9.28435 1.73701C9.37036 1.69725 9.46801 1.69459 9.55591 1.72961C9.64381 1.76463 9.7148 1.83448 9.75334 1.92387Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22 1V22" stroke="white" stroke-linecap="round" stroke-dasharray="2 2"/>
+</svg>
 
+`
 
 function Widget() {
   const id = useWidgetId();
@@ -208,9 +215,9 @@ function Widget() {
       propertyName: 'draw',
       itemType: 'action',
     },
-    {
+/*     {
       itemType: 'separator',
-    },
+    }, */
 /*     {
       tooltip: 'How To Use',
       propertyName: 'how_to_use',
@@ -268,9 +275,7 @@ node.y += 80 + randomInt;
 
 setRotation(cardRotation = randomRot)
 
-//node.rotation += 10;
-
-console.log(randomRot)
+//console.log(randomRot)
 
 //remove dealt card from deck
 
@@ -306,7 +311,22 @@ console.log(randomRot)
       icon: `<svg width="24" height="24" fill="none" stroke="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
       propertyName: "flip",
       tooltip: "Flip Card",
-    }
+    },
+    
+
+
+    {
+      itemType: 'separator',
+    },
+
+    {
+      itemType: "action",
+      icon: straigthenIconSrc,
+      propertyName: "straighten",
+      tooltip: "Straighten",
+    },
+  
+
    ],
     ({ propertyName }) => {
       if (propertyName === "flip") {
@@ -314,6 +334,9 @@ console.log(randomRot)
         //console.log('flipping')
         //console.log(isFlipped)
       }
+      else if (propertyName == 'straighten'){
+        setRotation(cardRotation = 0)
+    }
     }
   )
 }
