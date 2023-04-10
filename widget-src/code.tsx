@@ -135,11 +135,16 @@ const upIconSrc = `
   </svg>
 `
 const straigthenIconSrc = ` 
-<svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M6.00216 15.9736C6.70996 12.507 8.69128 9.43145 11.5552 7.35382C14.4192 5.27619 17.9578 4.34733 21.4729 4.75049" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 2"/>
-<path d="M9.75334 1.92387L16.0675 17.7979C16.101 17.8895 16.0982 17.9912 16.0597 18.0806C16.0213 18.1701 15.9504 18.2401 15.8626 18.2752L7.37136 21.9367C7.28534 21.9764 7.1877 21.9791 7.0998 21.9441C7.0119 21.909 6.94091 21.8392 6.90236 21.7498L0.588357 5.87527C0.554806 5.78359 0.557562 5.68179 0.596021 5.59222C0.63448 5.50265 0.705501 5.43262 0.793499 5.3975L9.28435 1.73701C9.37036 1.69725 9.46801 1.69459 9.55591 1.72961C9.64381 1.76463 9.7148 1.83448 9.75334 1.92387Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M22 1V22" stroke="white" stroke-linecap="round" stroke-dasharray="2 2"/>
+<svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.900565 1.21236L0.745778 18.4648C0.753228 18.562 0.797815 18.6534 0.869782 18.719C0.941748 18.7845 1.03523 18.8189 1.12976 18.8146L10.5595 18.8289C10.6543 18.8295 10.7443 18.7915 10.8098 18.7233C10.8754 18.6551 10.9111 18.5621 10.9093 18.4648L10.9093 1.20834C10.9019 1.11099 10.8573 1.01944 10.7853 0.953792C10.7132 0.88814 10.6196 0.853747 10.5249 0.858158L1.25032 0.84829C1.15556 0.847661 1.06555 0.885617 1 0.95385C0.934451 1.02208 0.898697 1.11504 0.900565 1.21236Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
+
+`
+const messyIconSrc =`
+<svg width="17" height="22" viewBox="0 0 17 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.24666 0.923866L0.932464 16.7979C0.899043 16.8895 0.901845 16.9912 0.940258 17.0806C0.97867 17.1701 1.04956 17.2401 1.13742 17.2752L9.62864 20.9367C9.71466 20.9764 9.8123 20.9791 9.9002 20.9441C9.9881 20.909 10.0591 20.8392 10.0976 20.7498L16.4116 4.87527C16.4452 4.78359 16.4424 4.68179 16.404 4.59222C16.3655 4.50265 16.2945 4.43262 16.2065 4.3975L7.71565 0.73701C7.62964 0.697251 7.53199 0.694591 7.44409 0.729611C7.35619 0.764632 7.2852 0.834479 7.24666 0.923866Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 2"/>
+</svg>
+
 
 `
 
@@ -314,20 +319,34 @@ setRotation(cardRotation = randomRot)
     },
     
 
-
     {
       itemType: 'separator',
     },
 
-    {
+/*     {
       itemType: "action",
       icon: straigthenIconSrc,
       propertyName: "straighten",
       tooltip: "Straighten",
+    }, */
+    
+    cardRotation !== 0
+    ? {
+      itemType: "action",
+      icon: straigthenIconSrc,
+      propertyName: "straighten",
+      tooltip: "Neat",
+    }
+    : {
+      itemType: "action",
+      icon: messyIconSrc,
+      propertyName: "messy",
+      tooltip: "Messy",
     },
-  
+
 
    ],
+
     ({ propertyName }) => {
       if (propertyName === "flip") {
         setFlipped(!isFlipped);
@@ -337,6 +356,11 @@ setRotation(cardRotation = randomRot)
       else if (propertyName == 'straighten'){
         setRotation(cardRotation = 0)
     }
+    else if (propertyName == 'messy'){
+      const randomRotation = Math.floor(Math.random() * 41) - 20; // generates a random number between -20 and 20
+    setRotation(randomRotation);
+  }
+
     }
   )
 }
