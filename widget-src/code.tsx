@@ -161,46 +161,41 @@ function Widget() {
 
   const [myArray, setmyArray] = useSyncedState("myArray", [
   //const myArray: [string, string][] = [
-    [ "Simplification/Streamlining:" , "Remove a feature from the design" ],
-    [ "Simplification/Streamlining:" , "Reduce the number of interactions" ],
-    [ "Simplification/Streamlining:" , "Eliminate a step in a process" ],
-    [ "Simplification/Streamlining:" , "Eliminate a source of complexity" ],
-    [ "Simplification/Streamlining:" , "Examine messaging for clarity" ],
-    [ "User-friendliness:" , "Improve discoverability of features or functionality" ],
-    [ "User-friendliness:" , "Provide additional feedback for succesful use" ],
-    [ "User-friendliness:" , "Incorporate easy error recover for the audience" ],
-    [ "User-friendliness:" , "Create a new personalized element of the design" ],
-    [ "User-friendliness:" , "Improve ease of use for new or infrequent users" ],
-    [ "Innovation/Technology:" , "Incorporate AI or Machine Learning into the solution" ],
-    [ "Innovation/Technology:" , "Incorporate an AR or XR experience into the solution" ],
-    [ "Innovation/Technology:" , "Incorporate a chatbot or other AI-powered tool " ],
-    [ "Innovation/Technology:" , "Improve how the design would handle long loading of content" ],
-    [ "Innovation/Technology:" , "Incorporate voice or gesture recognition" ],
-    [ "Accessibility/Inclusivity:" , "Make design more accessible for users with disabilities" ],
-    [ "Accessibility/Inclusivity:" , "Improve the designs usability for non-english speaking languages" ],
-    [ "Accessibility/Inclusivity:" , "Improve usability for low vision or colorblind disabilitites" ],
-    [ "Accessibility/Inclusivity:" , "Improve availability for remote or underserved areas" ],
-    [ "Accessibility/Inclusivity:" , "Make the design friendly to a wides range of devices, inlcuding low cost " ],
-    [ "Target Audience:" , "Align design with target audience preferences/values" ],
-    [ "Target Audience:" , "Improve usability for users with specific needs/interests" ],
-    [ "Target Audience:" , "Create emotional resonance with target audience" ],
-    [ "Target Audience:" , "Improve branding/messaging to better appeal to target audience" ],
-    [ "Target Audience:" , "Differentiate design from similar products in the market" ],
-    [ "Aesthetics:" , "Improve visual appeal/elegance" ],
-    [ "Aesthetics:" , "Integrate color/texture to make design more engaging" ],
-    [ "Aesthetics:" , "Incorporate animations/visual effects" ],
-    [ "Aesthetics:" , "Improve consistency/coherence across different screens/contexts" ],
-    [ "Aesthetics:" , "Align design with current design trends/styles" ],
-    [ "Sustainability:" , "Reduce environmental impact throughout lifecycle" ],
-    [ "Sustainability:" , "Incorporate recycled/sustainable materials" ],
-    [ "Sustainability:" , "Design product to be more energy-efficient/eco-friendly" ],
-    [ "Sustainability:" , "Communicate sustainability features to users/stakeholders" ],
-    [ "Sustainability:" , "Improve durability/longevity to reduce waste" ],
-    [ "Scalability/Adaptability:" , "Make design more scalable for larger volumes of users/data" ],
-    [ "Scalability/Adaptability:" , "Improve flexibility/adaptability to meet changing user needs" ],
-    [ "Scalability/Adaptability:" , "Accommodate users with multiple devices/platforms" ],
-    [ "Scalability/Adaptability:" , "Design product to be more modular/extensible" ],
-    [ "Scalability/Adaptability:" , "Improve performance/reliability under different usage scenarios." ]
+    [ "Simplification/Streamlining:" , "Remove a feature from the design, try to compensate" ],
+[ "Simplification/Streamlining:" , "Reduce the number of visible interactions" ],
+[ "Simplification/Streamlining:" , "Eliminate a step in a process" ],
+[ "Simplification/Streamlining:" , "Eliminate a source of complexity" ],
+[ "Simplification/Streamlining:" , "Examine messaging for clarity" ],
+[ "User-friendliness:" , "Improve discoverability of features or functionality" ],
+[ "User-friendliness:" , "Provide additional feedback for succesful use" ],
+[ "User-friendliness:" , "Incorporate easy error recover for the audience" ],
+[ "User-friendliness:" , "Create a new personalized element of the design" ],
+[ "User-friendliness:" , "Improve ease of use for new or infrequent users" ],
+[ "Innovation/Technology:" , "Incorporate AI or machine learning into the solution" ],
+[ "Innovation/Technology:" , "Incorporate an AR or XR experience into the solution" ],
+[ "Innovation/Technology:" , "Incorporate a chatbot or other AI-powered tool " ],
+[ "Innovation/Technology:" , "Improve how the design would handle long loading of content" ],
+[ "Innovation/Technology:" , "Incorporate Blockchain technology into the solution" ],
+[ "Accessibility/Inclusivity:" , "Evaluate the use of a screen reader with the design" ],
+[ "Accessibility/Inclusivity:" , "Improve the designs usability for non-english speaking languages" ],
+[ "Accessibility/Inclusivity:" , "Improve usability for low vision or colorblind disabilitites" ],
+[ "Accessibility/Inclusivity:" , "Improve design for limited hand mobility" ],
+[ "Accessibility/Inclusivity:" , "Evaluate usage on a wide range of devices. small and large format" ],
+[ "Target Audience:" , "Remove elements that do not address the primary audience" ],
+[ "Target Audience:" , "Address an additional pain point for this audience" ],
+[ "Target Audience:" , "Create a moment of delight for this audience" ],
+[ "Target Audience:" , "Improve messaging to better appeal to target audience" ],
+[ "Target Audience:" , "Differentiate design from other solutions trageting this audience" ],
+[ "Aesthetics:" , "Remove added stylistic treatments" ],
+[ "Aesthetics:" , "Consolidate color and texture usage" ],
+[ "Aesthetics:" , "Incorporate animations/visual effects" ],
+[ "Aesthetics:" , "Create an emotional element to the design" ],
+[ "Aesthetics:" , "Align design with current design trends/styles" ],
+[ "Scalability/Adaptability:" , "Make the design capable of handling extremely large amounts of data" ],
+[ "Scalability/Adaptability:" , "modularize design elements for use in a larger scale design system" ],
+[ "Scalability/Adaptability:" , "Adjust the design so that it will function on both desktop and mobile interfaces" ],
+[ "Scalability/Adaptability:" , "Make the design capable of adding additional use cases and workflows" ],
+[ "Scalability/Adaptability:" , "Make the navigation scalable to include a large number of options" ],
   ])
 
 
@@ -210,8 +205,8 @@ function Widget() {
   let [cardCat, setCat] =useSyncedState('cardcat', 'category')
   let randomCard:string = ''
   let [cardRotation, setRotation] = useSyncedState('cardRotation',0)
-  let [remainingCards, SetRemaining] = useSyncedState('remainingCards', 40)
-
+  //automate this initial card count at some point
+  let [remainingCards, SetRemaining] = useSyncedState('remainingCards', 35)
 
   const propertyMenu: WidgetPropertyMenuItem[] = [
 
@@ -284,10 +279,10 @@ setRotation(cardRotation = randomRot)
 
 //remove dealt card from deck
 
-      console.log(randomTIndex)
+     // console.log(randomTIndex)
 
       let indexToRemove = randomTIndex
-      console.log(indexToRemove)
+    //  console.log(indexToRemove)
 
       const newCards = myArray
       newCards.splice(indexToRemove,1)
@@ -467,6 +462,7 @@ if (isDeck) {
         </AutoLayout>
     )
   }
+
 }
 
 widget.register(Widget)
