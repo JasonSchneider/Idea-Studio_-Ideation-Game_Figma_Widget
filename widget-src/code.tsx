@@ -198,15 +198,13 @@ function Widget() {
 [ "Scalability/Adaptability:" , "Make the navigation scalable to include a large number of options" ],
   ])
 
-
   let [count, setCount] = useSyncedState('count', 0)
-  
   let [cardPrompt, setPrompt] =useSyncedState('cardprompt', 'prompt')
   let [cardCat, setCat] =useSyncedState('cardcat', 'category')
   let randomCard:string = ''
   let [cardRotation, setRotation] = useSyncedState('cardRotation',0)
-  //automate this initial card count at some point
-  let [remainingCards, SetRemaining] = useSyncedState('remainingCards', 35)
+  let [remainingCards, SetRemaining] = useSyncedState('remainingCards', (myArray.length))
+ 
 
   const propertyMenu: WidgetPropertyMenuItem[] = [
 
@@ -241,7 +239,8 @@ function Widget() {
  
 
   if (isDeck) {
-  usePropertyMenu(propertyMenu, ({ propertyName }) => {
+  
+    usePropertyMenu(propertyMenu, ({ propertyName }) => {
      if (propertyName == 'draw'){
       if (myArray.length === 0) {
         figma.notify("No cards to draw");
@@ -462,6 +461,8 @@ if (isDeck) {
         </AutoLayout>
     )
   }
+  SetRemaining(myArray.length)
+
 
 }
 
