@@ -5,12 +5,13 @@ const {
   AutoLayout,
   Rectangle,
   usePropertyMenu,
+  usePropertyMenuDropdown,
   useSyncedState,
   useWidgetId,
   Frame,
   SVG, } = widget
 
-
+const versioNumber = "v1.1"
 
 const cardbackSrc= `<svg width="325" height="505" viewBox="0 0 325 505" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_0_1)">
@@ -237,6 +238,17 @@ const bottomCornerCat =`<svg width="59" height="59" viewBox="0 0 59 59" fill="no
 <path d="M57 4V2H55H14C7.37258 2 2 7.37258 2 14V55V57H4H45C51.6274 57 57 51.6274 57 45V4Z" fill="none" stroke="none" stroke-width="3"/>
 </svg>`
 
+const faceup =`<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="9" height="15" rx="0.5" fill="white" stroke="white" stroke-linejoin="bevel"/>
+</svg>
+
+`
+const facedown =`<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="9" height="15" rx="0.5" stroke="white" stroke-linejoin="bevel"/>
+</svg>
+
+`
+
 let catIcon_default =`<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 <circle cx="9.5" cy="9.5" r="9.5" fill="white"/>
 </svg>
@@ -287,16 +299,10 @@ const Icon_Crescent = `<svg width="15" height="17" viewBox="0 0 15 17" fill="non
 function Widget() {
   const id = useWidgetId();
   const [isDeck] = useSyncedState("isDeck", true);
-  const [isFlipped, setFlipped] = useSyncedState("isFlipped", true);
+  let [isFlipped, setFlipped] = useSyncedState("isFlipped", false);
   
 
-  
-  
-  const [cards, setCards] = useSyncedState("cards", [
-    ["Simplification/Streamlining", "Remove unnecessary features"],
-    ["Simplification/Streamlining", "Simplify user interface"],
-    ["Simplification/Streamlining", "Reduce number of steps"],
-  ]);
+
 
   const [myArray, setmyArray] = useSyncedState("myArray", [
   //const myArray: [string, string][] = [
@@ -349,15 +355,14 @@ function Widget() {
   let [CatColor, setCatColor] =useSyncedState('CardColor','#FFFFFF')
   let [CatIcon, setCatIcon] =useSyncedState('caticon', catIcon_default)
 
-  let [cardRotation, setRotation] = useSyncedState('cardRotation',0)
+  let [cardRotation, setRotation] = useSyncedState('cardRotation',5)
   let [remainingCards, SetRemaining] = useSyncedState('remainingCards', (myArray.length))
-  let [dealstyle, setDealStyle] = useSyncedState('dealstyle', true)
+  let [dealstyle, setDealStyle] = useSyncedState('dealstyle', false)
+  let [dealfaceup, setDealFaceUp] = useSyncedState('dealfaceup', false)
+  let [DrawCount, setDrawCount] = useSyncedState('drawcount',1)
 
 
-  interface WidgetPropertyMenuDropdownOption {
-    label: string;
-    value: string;
-  }
+ 
   
   const propertyMenu: WidgetPropertyMenuItem[] = [
 
@@ -383,7 +388,29 @@ function Widget() {
       propertyName: "dealstyle_messy",
       tooltip: "Deal Messy",
     },
+
+    {
+      itemType: 'separator',
+    }, 
+
+    dealfaceup == true
+    ? {
+      itemType: "action",
+      icon: faceup,
+      propertyName: "dealstyle_faceup",
+      tooltip: "Deal Face Up",
+    }
+    : {
+      itemType: "action",
+      icon: facedown,
+      propertyName: "dealstyle_facedown",
+      tooltip: "Deal Face Down",
+    },
+    
+ 
   ]
+
+
 
   // controls the features of the "Deck"
   if (isDeck) {
@@ -399,13 +426,40 @@ function Widget() {
         
       }
   
+
+  
       else if (propertyName == 'dealstyle_messy'){
         
           setDealStyle(dealstyle = true)
           setRotation(cardRotation = 0)
 
-          console.log(dealstyle)
+          //console.log(dealstyle)
         }
+
+        else if (propertyName == 'dealstyle_facedown'){
+        
+          setDealFaceUp(dealfaceup = true)
+          setFlipped(isFlipped = true)
+          //console.log("Face Down pressed")
+          //console.log("is flipped:", isFlipped)
+          //console.log("deal face up:", dealfaceup)
+          }
+          
+        else if (propertyName == 'dealstyle_faceup'){
+          
+          setDealFaceUp(dealfaceup = false)
+          
+          setFlipped(isFlipped = false)
+
+          //console.log("Face Up pressed")
+          //console.log("is flipped:", isFlipped)
+          //console.log("deal face up:", dealfaceup)
+
+        }
+
+
+
+
       
      //draw card
       else if (propertyName == 'draw'){
@@ -425,37 +479,35 @@ function Widget() {
       setCatIcon(CatIcon = randomTuple[3])
 
       catIcon_default = CatIcon
-      //console.log(catIcon_default)
+      
 
       //duplicate card
+      for (let i = 0; i < DrawCount; i++) {
+        const node = (figma.getNodeById(id) as WidgetNode).cloneWidget({
+          isDeck: false,
+          //isFlipped: false,
+        });
       
-      const node = (figma.getNodeById(id) as WidgetNode).cloneWidget({
-        isDeck: false,
-        isFlipped: false,
-      });
-
-      //offset card
-      const randomInt: number = Math.floor(Math.random() * 201) - 100; // generate random integer 
+        //offset card
+        const randomInt: number = Math.floor(Math.random() * 201) - 100; // generate random integer 
       
-      if (dealstyle === false) {
-        const randomRot: number = Math.floor(Math.random() * 21) - 10;
-        setRotation(cardRotation = randomRot)
+        if (dealstyle === false) {
+          const randomRot: number = Math.floor(Math.random() * 21) - 10;
+          setRotation(cardRotation = randomRot)
+        }
+      
+        node.x += 330 + randomInt;
+        node.y += 80 + randomInt;
+      
+        //remove dealt card from deck
+        let indexToRemove = randomTIndex;
+        const newCards = myArray;
+        newCards.splice(indexToRemove,1);
+        setmyArray(newCards);
+        SetRemaining(myArray.length);
 
       }
-
-      node.x += 330 + randomInt;
-      node.y += 80 + randomInt;
-
-
-      //remove dealt card from deck
-
-      let indexToRemove = randomTIndex
-      const newCards = myArray
-      newCards.splice(indexToRemove,1)
-      setmyArray(newCards)         
-      SetRemaining(myArray.length)
-
-      }
+    }       
   })
 
   } 
@@ -473,13 +525,6 @@ function Widget() {
     {
       itemType: 'separator',
     },
-
-/*     {
-      itemType: "action",
-      icon: straigthenIconSrc,
-      propertyName: "straighten",
-      tooltip: "Straighten",
-    }, */
     
     cardRotation !== 0
     ? {
@@ -527,20 +572,49 @@ if (isDeck) {
       <SVG positioning={'absolute'} x={1} y={-1} src= {cardstackSrc}
       > </SVG>
 
-{/*       <SVG positioning={'absolute'} x={1} y={-1} src= {cardbackSrc}
-      > </SVG>
-
-      <SVG positioning={'absolute'} x={25} y={29} src= {cardbacksketchesSrc}
-      > </SVG> */}
-
       <Text fontSize={20} fill={'#000000'} width={297} height={30} verticalAlignText={'center'} horizontalAlignText={'left'} positioning={'absolute'} x={14} y={518}
       >
-        {remainingCards} Cards Remaining :DEV
+        {remainingCards} Cards Remaining
       </Text>
-      
+      <Text
+      name="version"
+      fill="#000"
+      width={67}
+      height={15}
+      verticalAlignText="bottom"
+      horizontalAlignText="right"
+      fontFamily="Inter"
+      fontSize={12}
+      positioning={'absolute'}
+      fontWeight={700}
+      x={267} y={528}
+    >
+      {versioNumber} 
+      </Text>
     </AutoLayout>
   )
 } 
+//empty deck visual?
+else if (isDeck && remainingCards === 0)  {
+  return (
+    
+    <AutoLayout
+    width={355}
+    height={546}
+    rotation={0}
+    >
+      <SVG positioning={'absolute'} x={1} y={-1} src= {cardstackSrc}
+      > </SVG>
+
+      <Text fontSize={20} fill={'#000000'} width={297} height={30} verticalAlignText={'center'} horizontalAlignText={'left'} positioning={'absolute'} x={14} y={518}
+      >
+        out of cards test
+      </Text>
+ 
+    </AutoLayout>
+  )
+} 
+
 // "card" not flipped layout aka card back
 else if (!isFlipped) {
     return (
